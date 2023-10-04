@@ -1,0 +1,67 @@
+Practice:
+
+import pymongo # python driver for MongoDB
+import credentials #file containing your credentials
+
+connection_string = f"mongodb+srv://{credentials.username}:{credentials.password}@cluster0.d130e9a.mongodb.net/?retryWrites=true&w=majority"
+
+#create an instance called client to connect to the database
+client = pymongo.MongoClient(connection_string)
+db = client['practice_db'] #this connect to an existing or new database
+db = client.practice_db #you can follow this tsyle as well to create a new database
+
+collection = db['sample_json_datasets']  #this creates a new collection in practice_db
+
+collection.drop() 
+
+
+
+
+
+
+---------------------------------------------------------------------------------------
+CREATE KEYSPACE “KeySpace Name”
+WITH replication = {'class': ‘Strategy name’, 'replication_factor' : ‘No.Of   replicas’};
+
+Strategy name	Description
+
+Simple Strategy -	Specifies a simple replication factor for the cluster.
+Network Topology Strategy	- Using this option, you can set the replication factor for each data-center independently.
+Old Network Topology Strategy- This is a legacy replication strategy.
+
+verify whether the table is created or not using the command Describe:
+desc keyspaces;
+
+You can use a created KeySpace using the keyword USE.
+Use <keyspace_name>;
+
+DROP KEYSPACE “KeySpace name”
+
+
+import json
+import random
+
+# Number of restaurants to generate data for
+num_restaurants = 10
+
+# Create an empty list to store restaurant data
+restaurant_data = []
+
+# Generate synthetic data for each restaurant
+for i in range(num_restaurants):
+    restaurant = {
+        "restaurant_id": i + 1,
+        "restaurant_name": f"Restaurant {i + 1}",
+        "cuisine_type": random.choice(["Italian", "Japanese", "Mexican", "Indian", "American"]),
+        "location": f"City {random.randint(1, 5)}",
+        "rating": round(random.uniform(1, 5), 1),  # Generate a random rating between 1 and 5
+        "num_reviews": random.randint(10, 1000)
+    }
+    restaurant_data.append(restaurant)
+
+# Save the restaurant data to a JSON file
+with open("restaurant_ratings.json", "w") as json_file:
+    json.dump(restaurant_data, json_file, indent=4)
+
+print(f"Synthetic data for {num_restaurants} restaurants saved to 'restaurant_ratings.json'.")
+

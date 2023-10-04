@@ -133,3 +133,48 @@ db.orders.aggregate( [
    { $project: { value: { count: { $size: "$orders_ids" }, qty: "$qty", avg: { $divide: [ "$qty", { $size: "$orders_ids" } ] } } } },
    { $merge: { into: "agg_alternative_3", on: "_id", whenMatched: "replace",  whenNotMatched: "insert" } }
 ] )
+
+db.orders.aggregate( [
+   // Stage 1: Filter pizza order documents by pizza size
+   {
+      $match: { size: "medium" }
+   },
+   // Stage 2: Group remaining documents by pizza name and calculate total quantity
+   {
+      $group: { _id: "$name", totalQuantity: { $sum: "$quantity" } }
+   }
+] )
+
+db.orders.aggregate( [
+   // Stage 1: Filter pizza order documents by date range
+   {
+      $match:
+      {
+         "date": { $gte: new ISODate( "2020-01-30" ), $lt: new ISODate( "2022-01-30" ) }
+      }
+   },
+   // Stage 2: Group remaining documents by date and calculate results
+   {
+      $group:
+      {
+         _id: { $dateToString: { format: "%Y-%m-%d", date: "$date" } },
+         totalOrderValue: { $sum: { $multiply: [ "$price", "$quantity" ] } },
+         averageOrderQuantity: { $avg: "$quantity" }
+      }
+   },
+   // Stage 3: Sort documents by totalOrderValue in descending order
+   {
+      $sort: { totalOrderValue: -1 }
+   }
+ ] )
+ 
+MongoDB $group aggregation operators
+The $group stage supports certain expressions (operators) allowing users to perform arithmetic, array, boolean and other operations as part of the aggregation pipeline.
+
+Operator	Meaning
+$count	Calculates the quantity of documents in the given group.
+$max	Displays the maximum value of a document’s field in the collection.
+$min	Displays the minimum value of a document’s field in the collection.
+$avg	Displays the average value of a document’s field in the collection.
+$sum	Sums up the specified values of all documents in the collection.
+$push	Adds extra values into the array of the resulting document.
