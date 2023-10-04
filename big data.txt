@@ -1,0 +1,76 @@
+Tim Big data class:
+
+virtual environment  - XUbuntu OS ; the system requires less memory and less CPU.
+the shell here is called bash
+
+Package Management: Conda allows users to easily install, update, and remove software packages and libraries. 
+It excels at managing packages with complex dependencies.
+conda install <package_name>
+or
+conda install -c conda-forge <package_name>
+
+base - we use base environment
+
+pip - standard package anager for python
+pip install <name>
+
+up arrow for history
+clear - to clear screen
+
+commands:
+jupyter lab - to launch jupyter lab
+code - to launch VS code
+
+Multiprocess:
+It can accelerate some jobs but also it can accelerate only jobs that are complex or big enough
+for small jobs this is not required
+
+Big Data:
+Exponential growth in Organizational Data Volume
+
+Traditional Database - Scaling Issue
+the no of communication channels increase exponentially on adding nodes
+n(n-1)/2 = o(n^2)
+i.e the communication cost also increases exponentially with inceasing no of nodes.
+
+ACID Property of Traditional Database:
+--atomicity; Consistency; Isolation; Durability
+
+2-phase lock and Unlock Protocol:
+Users communicate with each other and lock the data so that they can do updates on the data and once they unlock it other users can write their own changes to the data.
+
+The performance game is logarthmic.
+
+To increase the no of users in the application by 50%, we need to double the investment in IT. - This is not a scalable way of managing infrastructure
+
+NoSQL database:
+Linear scaling: 2 nodes should support 200 users; we reduce the communication overhead in database cluster
+by relxing the ACID properties.
+
+data is not that consistent - by doing this we eliminate communication overhead by removing  lock unlock protocol. 
+Therefore, it is "Eventually Consistent".
+
+There are lot of scenarioes where real time consistency of data is not required - then u can relax the acid properties.
+
+Issues with Traditional RDBMS:
+-weak clustering technology
+-does not scale horizontally
+-suitable for structured data format only (data format is known before database is designed)
+
+--strict ACID rules,
+due to which every data needs to be synchronized accross all clusters before a transaction is completed.
+--adds overhead to the database system making linear scaling impossible to acheive.
+
+Semi-Structured Data:
+Incoming data is structured.
+structure is not known apriori
+data structure may change from instance to instance (eg; no if product features may change fro a product)
+
+No SQL Database::
+Relaxed ACID property
+Distributed across multiple nodes
+Scaling is more imo than perfect synchronization
+semi-structure data format is suitable
+
+You cant query big data systems with SQL though u can use similar languages like
+Hive; Impala; Spark-SQL

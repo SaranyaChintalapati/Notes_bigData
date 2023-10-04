@@ -1,0 +1,18 @@
+# Switch to your feature branch
+git checkout feature-branch
+
+# Pull changes from main with merge strategy
+git pull origin main
+
+
+# Switch to your feature branch
+git checkout feature-branch
+
+# Pull changes from main with rebase strategy
+git pull --rebase origin main
+
+# Switch to your feature branch
+git checkout feature-branch
+
+# Pull changes from main with fast-forward only strategy
+git pull --ff-only origin main

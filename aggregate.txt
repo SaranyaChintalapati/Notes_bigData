@@ -1,0 +1,135 @@
+db.collection.aggregate( [
+{ $match: <queryFilter> },
+{ $sort: <sortOrder> },
+{ $limit: <number> },
+{ $project: { emits: { k: <expression>, v: <expression> } } },
+{ $unwind: "$emits" },
+{ $group: {
+_id: "$emits.k"},
+value: { $accumulator: {
+init: <initCode>,
+accumulate: <reduceFunction>,
+accumulateArgs: [ "$emit.v"],
+merge: <reduceFunction>,
+finalize: <finalizeFunction>,
+lang: "js" }}
+} },
+{ $out: <collection> }
+] )
+
+
+db.collection.aggregate( [
+{ $match: <queryFilter> },
+{ $sort: <sortOrder> },
+{ $limit: <number> },
+{ $project: { emits: { k: <expression>, v: <expression> } } },
+{ $unwind: "$emits" },
+{ $group: {
+_id: "$emits.k"},
+value: { $accumulator: {
+init: <initCode>,
+accumulate: <reduceFunction>,
+accumulateArgs: [ "$emit.v"],
+merge: <reduceFunction>,
+finalize: <finalizeFunction>,
+lang: "js" }}
+} },
+{ $out: { db: <db>, coll: <collection> } }
+] )
+
+
+db.collection.aggregate( [
+{ $match: <queryFilter> },
+{ $sort: <sortOrder> },
+{ $limit: <number> },
+{ $project: { emits: { k: <expression>, v: <expression> } } },
+{ $unwind: "$emits" },
+{ $group: {
+_id: "$emits.k"},
+value: { $accumulator: {
+init: <initCode>,
+accumulate: <reduceFunction>,
+accumulateArgs: [ "$emit.v"],
+merge: <reduceFunction>,
+finalize: <finalizeFunction>,
+lang: "js" }}
+} },
+{ $merge: {
+into: { db: <db>, coll: <collection>},
+on: "_id"
+whenMatched: "replace",
+whenNotMatched: "insert"
+} },
+] )
+
+
+
+db.collection.aggregate( [
+{ $match: <queryFilter> },
+{ $sort: <sortOrder> },
+{ $limit: <number> },
+{ $project: { emits: { k: <expression>, v: <expression> } } },
+{ $unwind: "$emits" },
+{ $group: {
+_id: "$emits.k"},
+value: { $accumulator: {
+init: <initCode>,
+accumulate: <reduceFunction>,
+accumulateArgs: [ "$emit.v"],
+merge: <reduceFunction>,
+finalize: <finalizeFunction>,
+lang: "js" }}
+} },
+{ $merge: {
+into: { db: <db>, coll: <collection> },
+on: "_id"
+whenMatched: [
+{ $project: {
+value: { $function: {
+body: <reduceFunction>,
+args: [
+"$_id",
+[ "$value", "$$new.value" ]
+],
+lang: "js"
+} }
+} }
+]
+whenNotMatched: "insert"
+} },
+] )
+
+
+
+db.collection.aggregate( [
+{ $match: <queryFilter> },
+{ $sort: <sortOrder> },
+{ $limit: <number> },
+{ $project: { emits: { k: <expression>, v: <expression> } } },
+{ $unwind: "$emits" },
+{ $group: {
+_id: "$emits.k"},
+value: { $accumulator: {
+init: <initCode>,
+accumulate: <reduceFunction>,
+accumulateArgs: [ "$emit.v"],
+merge: <reduceFunction>,
+finalize: <finalizeFunction>,
+lang: "js" }}
+} }
+] )
+
+
+db.orders.aggregate([
+   { $group: { _id: "$cust_id", value: { $sum: "$price" } } },
+   { $out: "agg_alternative_1" }
+])
+
+
+db.orders.aggregate( [
+   { $match: { ord_date: { $gte: new Date("2020-03-01") } } },
+   { $unwind: "$items" },
+   { $group: { _id: "$items.sku", qty: { $sum: "$items.qty" }, orders_ids: { $addToSet: "$_id" } }  },
+   { $project: { value: { count: { $size: "$orders_ids" }, qty: "$qty", avg: { $divide: [ "$qty", { $size: "$orders_ids" } ] } } } },
+   { $merge: { into: "agg_alternative_3", on: "_id", whenMatched: "replace",  whenNotMatched: "insert" } }
+] )

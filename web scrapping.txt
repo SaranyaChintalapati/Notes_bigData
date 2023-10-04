@@ -1,0 +1,7 @@
+web scrapping - Python:
+
+with open('filename', 'mode') as file:
+    # Perform operations on the file
+    # Read or write data
+# File is automatically closed outside the 'with' block
+

@@ -1,0 +1,77 @@
+Docker:
+
+Docker is a platform and set of tools designed to facilitate the creation, deployment, and management of applications 
+within lightweight, isolated environments called containers. 
+
+Containers are a form of virtualization that allows you to package an application and all its dependencies, including 
+libraries and configurations, into a single, portable unit.
+
+--docker occupies less memory space
+--short boot-time
+--better performance than VM
+
+CLI command for docker is : docker
+
+Docker Engine:
+Docker Command Line Interface (Docker Client)
+		|
+	API (API specifications)
+		|
+Docker Daemon (Docker Server)
+
+
+docker Daemon:
+1. Containers
+2. Images
+	
+
+--docker images acts as a blueprint to run containers 
+--container is a running instance of the image.
+
+to run docker image: 
+docker run <image_name>
+
+Adding -it to docker run will give us an interactive shell within the started container
+docker run it <image-name> -- start an interctive container
+docker run -d <image-name> -- start a detached container
+docker ps -- list running containers
+docker stop <container-id> - stop a container
+
+-d: This flag runs the container in detached mode, which means it runs in the background.
+
+Naming a container:
+docker run --name <container-name> <image-name>
+
+filtering running commands:
+docker ps -f "name = <container-name>"
+
+we can use container names instead of container IDS to run docker commands
+
+container logs:
+docker logs ,container-id> (to see existing logs)
+docker logs -f <container-id> (to see live logs)
+CTRL + C -- to exit live log view
+
+cleaning container:
+docker run -rm <container-name>
+
+docker hub is a registery of community made docker images. we can download pre made images from this website
+
+downloading an image from docker hub is called pulling an image:
+docker pull <image-name>
+to pull a specific version:
+docker pull <image-name>:<image-version>
+
+docker images : list of all images 
+docker image rm <image-name>
+docker container prune - remove all stopped containers
+docker image prune -a : to remove all images
+
+Distributing docker images:
+
+pull image from private registry: docker pull <private-registry-url>/<image-name>
+name an image: docker tag <old-name><new-name>
+push to a registry: docker image push <image-name>
+login to private registry: docker login <private-registry-url>
+save image to file: docker save -o <file-name><image-name>
+load image from file: docker load -i <file-name>

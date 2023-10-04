@@ -1,0 +1,148 @@
+OLTP : online transaction Processing
+
+data warehouse: take the data from mysql which is OLTP(Online transaction processing system) and ETL (Extract , transform and load) and using ETL store this data in 
+a data warehouse (eg: teradata, snowflake). To do this tranformation we can use apache, pandas, python in general.
+
+we are creating ETL and extracting the data because when performing analytics on Power BI by connecting it to mysql which is our main database or OLTP, with our 
+analytical queries there are chances we can slow down the database system or cause issues in the main running DB so to avoid that we create a data warehouse and use that for 
+the analysis.
+
+Also, OLTP data is not always in the required format so we have to transform it to our required format. 
+-> data engineers do this transformation and maintain
+the data warehouse infrastructure.
+
+
+OlAP (Online Analytical Processing):
+-- consists of analytical tools for data analysis.
+-- Used for offline storage.
+-- allows database info extraction from multiple databases.
+
+OLTP (Online Transaction Processing):
+-- Manages day to day transactions of an organizations.
+-- Used for data processing.
+
+Star Schema:
+-> Fact Table: it usually is the table where actual transactions that happen in the business
+-> Dimension Table: eg: customers, etc
+
+Data Modelling:
+it is the process of diagramming data flows; defining all the data your business collects and relationships between those.
+
+Machine Learning:
+
+sklearn:
+The sklearn lib is used for modelling data and it provides tools that can be used for any kind of predictive analysis.
+The main use cases of this library are:
+->Preprocessing
+->Regression
+->Classification
+->Clustering
+->Model Selection
+->Dimensionality Reduction
+
+%matplotlib inline is a magic command used in Jupyter Notebook or JupyterLab to enable the inline plotting of graphs
+
+Gradient decent :
+Using x and y values, we try to derive a function called prediction function like y = 2x + 3 (regression)
+Mean square error = 1/n *(Predicted - Actual)^2  --> This is the cost function
+b2 = b1 - learning rate * partial derivative of b
+
+lambda x: x**2
+
+lambda x,y: x+y
+
+sample_func = lambda x,y: x if x>y else y
+sample_func(3,5)
+
+Python Pandas:
+
+df.shape()
+df.head() -- also df.tail() to check for bottom rows
+df[2:5]
+df.columns 
+df['<column_name>']
+type(df)
+df.max()
+df.std() - standard deviation
+df.describe() - to get the summary of dataframe ( all kinds of statistics)
+df[df.temperature>=32]
+df.index - df.set_index ;also we can find a row using index value with df.loc('')
+
+--creating dataframes:
+pd.read_csv()
+pd.read_excel(file path, <sheet name>)
+weather data = ........... then create dataframe by: df = pd.DataFrame(weather data)
+
+df = pd.read_csv('filename', header = None, names = ['colnames',''])
+
+--converters to pre process the data while reading excel file in pandas
+
+fillna():
+	there are various types of fillna() like forward fill , backward fill 
+	
+dropna(how = "any") or give thresh = 1 (meaning dodnt drop if atleast one non null value exists in the row)
+
+replace:
+df.replace('existing value','new value')
+
+groupby:
+g = df.groupby()
+g.decsrib(). g.mean()
+
+-- can perform all kinds of join using merge()
+
+
+shift+tab to know about the module: shortcut in jupyter notebook
+
+
+reshaping data frame using stack unstack:
+
+we can convert two header columns to single row columns
+
+Crosstab:
+a matrix table that shows frequency distribution of the data.
+
+engine = sqlalchemy.create_engine('mysql+pymysql://root:Goldilocks123$@localhost:3306/sales')
+
+pd.read_sql_table: to directly read from database
+pd.read_sql_query: to read from query
+
+df.to_sql() : to append data to the database or replace data
+
+
+math.floor(): to roundup the values
+
+One hot encoding
+
+Conditional probability: finding probability of event A happening knowing that event B has already occurred.
+here, we make a naive assumption that features are independent of each other.
+
+Naive bayes is used in email spam detection, facial recognition,character recognition news article categorization, weather prediction.
+
+K fold cross validation:
+randomly splits the data into K equally sized fold
+
+stratifiedKfolds: t ensures uniform distribution accross all the folds
+
+Variance: difference in fits between datasets (train and test) is called variance
+
+Three commonly used methods for finding the sweet spot between simple and complex models are: regularization, boosting, bagging
+
+K-means clustering:
+technique to find out K value is using elbow technique by drawing a plot between K values Vs SSE (sum of squared error)
+
+The process of choosing optimal parameter for the machine learning model is called hyper parameter tuning.
+
+KNN Classification:
+
+three nearest (for K = 3) datapoints and calculate the euclerian distance, and classfiy our point to the nearest K datapoints (max)
+
+PRinciple Component Analysis(PCA): used to reduce dimensions
+a process of figuring out the most important features that have impact on target variable
+-- u need to scale the features before applying PCA
+
+from sklearn.decomposition import PCA
+pca = PCA(0.95)
+
+
+

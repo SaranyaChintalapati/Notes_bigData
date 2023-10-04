@@ -1,0 +1,137 @@
+Shell scripting:
+
+--filesystem manages files and directories(folders)
+pwd - print working directory
+ls - lists the contents of current directory : ls -la
+cd - change directory
+cd .. -> takes you to previous directory
+cp - to copy files
+cp (Copy Files or Directories):
+cp source_file destination: Copy a file to a specified destination.
+cp -r source_directory destination: Copy a directory and its contents recursively.
+
+mv - move a directory (a file from one directory to another)
+both cp and mv will overwrite the existing files	
+. (single dot) - takes you to the current directory (cd . - stay in the current directory)
+.. - takes you to parent directory of ur current directory( .. refers to the directory above your current location)
+rm - to remove files
+rmdir - to delete a directory( but the dorectory has to be empty inorder to delete or else shell throws an error)
+~ - refers to home or root directory
+
+rm (Remove Files or Directories):
+
+rm filename: Remove a file named "filename."
+rm -r directory_name: Remove a directory and its contents recursively.
+mkdir - to make a new directory
+
+cat - to view the contents of a file
+less command is used to view file peice by peice; spacebar to go down :n to go to second file ; :q to quit
+head - to view the starting lines of any file
+The "-n" option specifies the number of lines
+man - manual command contains details about every shell command
+ls -R  - every file and directory in the current level (recursive)
+
+ls (List Files and Directories):
+ls: List files and directories in the current directory.
+ls -l: List files and directories in long format (with details).
+ls -a: List all files and directories, including hidden ones.
+
+touch (Create Empty File):
+touch filename: Create an empty file named "filename."
+
+Printing: Display output using echo or printf.
+
+bash
+Copy code
+echo "Hello, World!"
+
+
+-f : field
+-d : delimmitter
+
+history - this command is used to check the history of previously executed commands
+you can also call the previous commands using their number : !55 to re-run the 55th command
+grep - to selects lines (or to search patterns)
+				-c: print a count of matching lines rather than the lines themselves
+				-h: do not print the names of files when searching multiple files
+				-i: ignore case (e.g., treat "Regression" and "regression" as matches)
+				-l: print the names of files that contain matches, not the matches
+				-n: print line numbers for matching lines
+				-v: invert the match, i.e., only show lines that don't match
+				
+head -n 5 seasonal/summer.csv > top.csv
+to store the output into a new file called top.csv
+The greater-than sign > tells the shell to redirect head's output to a file
+
+The pipe symbol tells the shell to use the output of the command on the left as the input to the command on the right.
+
+wc ("word count") prints the number of characters, words, and lines in a file. You can make it print only one of these using -c, -w, or -l
+
+* is used as wildcard
+		? matches a single character, so 201?.txt will match 2017.txt or 2018.txt, but not 2017-01.txt.
+		[...] matches any one of the characters inside the square brackets, so 201[78].txt matches 2017.txt or 2018.txt, but not 2016.txt.
+		{...} matches any of the comma-separated patterns inside the curly brackets, so {*.txt, *.csv} matches any file whose name ends with .txt or .csv, 
+		but not files whose names end with .pdf.
+		
+Ctrl + C to end it. This is often written ^C
+
+to get the value of a variable called X, you must write $X
+
+bash headers.sh - This tells the shell (which is just a program called bash) to run the commands contained in the file headers.sh, 
+which produces the same output as running the commands directly.
+
+nano dates.sh --> to edit files
+next click Ctrl + O and press enter -> to save
+next click ctrl + X -> to exit 
+
+As a reminder, to save what you have written in Nano, type Ctrl + O to write the file out, 
+then Enter to confirm the filename, then Ctrl + X to exit the editor.
+
+bash unique-lines.sh seasonal/summer.csv
+the shell replaces $@ with seasonal/summer.csv and processes one file
+
+sudo - you can temporarily become the superuser
+
+echo - works like print function ; to display or print messages on to terminal.
+
+GITHUB :
+
+
+git add * : will add all the files
+
+git status - to check for any uncommited files or new files
+
+git commit -m "This is my first commit."
+
+git push origin main -
+command is used in Git to push the changes you've made in your local main branch to a remote repository named origin.
+In Git, main is commonly used as the default name for the primary branch, although
+
+
+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
+
+cloud-based hosting service to upload and track their work aka version control
+we dont have to store large files locally
+similar to github: gitlab and bitbucket
+
+repo will contain all files of a project and record past versions of files.
+
+type nano filename, it will open filename for editing
+Ctrl + K: delete a line.
+Ctrl + U: un-delete a line.
+Ctrl + O: save the file ('O' stands for 'output'). You will also need to press Enter to confirm the filename!
+Ctrl + X: exit the editor.
+
+README files are like instruction manuals for repositories.
+
+Cloning is one of the ways you can copy a repository and allows you to work on a project on your local computer.
+
+Run the Entire Script as Superuser: If your entire script requires administrative privileges, you can start the script with sudo,
+ and the entire script will be executed with elevated privileges.
+ # This runs the entire script as the superuser
+ 
+git pull: This Git command is a combination of two actions: git fetch followed by git merge. It's used to update your local branch with the latest changes from a remote branch.
+sudo ./my_script.sh
+
+token for github:
+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
